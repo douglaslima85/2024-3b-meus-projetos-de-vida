@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Anta&family=Kode+Mono:wght@600&display=swap');
+
+
+:root{
+   --verde-fraco: #2dc653;
+   --verde: #6ede8a;
+   --vermelho: #e71d36;
+    --preto: #000000;
+    --font-text:"Anta", sans-serif;
+    --font-titulo: "Rubik", sans-serif
+}
+
+body{
+    background-color: var(--verde-fraco);
+}
