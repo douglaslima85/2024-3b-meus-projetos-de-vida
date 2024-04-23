@@ -10,9 +10,18 @@ const tempoObjetivo04 = new Date("2024-11-26T00:00:00")
 
 const tempo = [tempoObjetivo01, tempoObjetivo02, tempoObjetivo03, tempoObjetivo04];
 
-for (let i= 0; i<tempo.length; i++){
-    contadores[i].textContent = calculaTempo(tempo[i])
+function atualizaCronometro () {
+   for (let i= 0; i<tempo.length; i++){
+       contadores[i].textContent = calculaTempo(tempo[i])
+  }
 }
+
+function comecaCronometro() {
+     atualizaCronometro();
+     setInterval(atualizaCronometro,1000);
+}
+
+//comecaCronometro ();
 
 for(let i= 0; i<botoes.length; i++){
 botoes[i].onclick = function (){
@@ -40,6 +49,9 @@ function calculaTempo (tempoObjetivo){
     segundos %= 60;
     minutos %= 60;
     horas %= 24;
-
+    if(tempoFinal > 0){
     return dias + " Dias " + horas + " Horas " + minutos + " Minutos " + segundos + " Segundo "
+    }else{
+        return "Prazo finalizado"
+    }
 }
