@@ -10,48 +10,55 @@ const tempoObjetivo04 = new Date("2024-11-26T00:00:00")
 
 const tempo = [tempoObjetivo01, tempoObjetivo02, tempoObjetivo03, tempoObjetivo04];
 
-function atualizaCronometro () {
-   for (let i= 0; i<tempo.length; i++){
-       contadores[i].textContent = calculaTempo(tempo[i])
-  }
-}
+for (let i = 0; i < botoes.length; i++) {
+    botoes[i].onclick = function () {
 
-function comecaCronometro() {
-     atualizaCronometro();
-     setInterval(atualizaCronometro,1000);
-}
+        for (j = 0; j < botoes.length; j++) {
+            botoes[j].classList.remove('ativo')
+            textos[j].classList.remove('ativo')
+        }
 
-//comecaCronometro ();
-
-for(let i= 0; i<botoes.length; i++){
-botoes[i].onclick = function (){
-
-    for(j=0; j<botoes.length; j++){
-        botoes[j].classList.remove('ativo')
-        textos[j].classList.remove('ativo')
+        botoes[i].classList.add('ativo')
+        textos[i].classList.add('ativo')
     }
-
-    botoes[i].classList.add('ativo')
-    textos[i].classList.add('ativo')
-}
 }
 
-function calculaTempo (tempoObjetivo){
+function calculaTempo(tempoObjetivo) {
 
     let tempoAtual = new Date()
     let tempoFinal = tempoObjetivo - tempoAtual
 
-    let segundos = Math.floor(tempoFinal/1000);
-    let minutos = Math.floor(segundos/60);
-    let horas = Math.floor(minutos/60);
-    let dias = Math.floor(horas/24);
+    let segundos = Math.floor(tempoFinal / 1000);
+    let minutos = Math.floor(segundos / 60);
+    let horas = Math.floor(minutos / 60);
+    let dias = Math.floor(horas / 24);
 
     segundos %= 60;
     minutos %= 60;
     horas %= 24;
-    if(tempoFinal > 0){
-    return dias + " Dias " + horas + " Horas " + minutos + " Minutos " + segundos + " Segundo "
-    }else{
-        return "Prazo finalizado"
+
+    if (tempoFinal > 0) {
+        return [dias, horas, minutos, segundos];
+    } else {
+        return [0, 0, 0, 0];
     }
 }
+
+function atualizaCronometro() {
+    for (let i = 0; i < contadores.length; i++) {
+        document.getElementById("dias" + i).textContent = calculaTempo(tempo[i])[0];
+        document.getElementById("horas" + i).textContent = calculaTempo(tempo[i])[1];
+        document.getElementById("minutos" + i).textContent = calculaTempo(tempo[i])[2];
+        document.getElementById("segundo" + i).textContent = calculaTempo(tempo[i])[3];
+
+    }
+}
+
+function comecaCronometro() {
+    atualizaCronometro();
+    setInterval(atualizaCronometro, 1000);
+}
+
+
+
+comecaCronometro();
